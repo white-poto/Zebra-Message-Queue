@@ -2,6 +2,7 @@
     "name": "jenner/message_queue",
     "description": "php message queue wrapper",
     "license": "MIT",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Jenner",
