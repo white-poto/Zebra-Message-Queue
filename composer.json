@@ -1,5 +1,5 @@
 {
-    "name": "jenner/zebra/message_queue",
+    "name": "jenner/zebra/message-queue",
     "description": "php message queue wrapper",
     "license": "MIT",
     "authors": [
