@@ -35,14 +35,14 @@ class SystemVMessageQueue implements IMessageQueue
     private $key_t;
 
     /**
-     * @param $ipc_filename IPC通信标志文件，用于获取唯一IPC KEY
      * @param $msg_type 消息类型
+     * @param string $ipc_filename IPC通信标志文件，用于获取唯一IPC KEY
      * @param bool $serialize_needed 是否序列化
      * @param bool $block_send 无法写入队列时，是否阻塞
      * @param int $option_receive 设置位MSG_IPC_NOWAIT，如果无法获取到一个消息，则不等待；如果设置位NULL，则会等待消息到来
      * @param int $maxsize 希望接收到的最大消息
      */
-    public function __construct($msg_type, $ipc_filename = __FILE__, $serialize_needed = true, $block_send = false, $option_receive = MSG_IPC_NOWAIT, $maxsize = 100000)
+    public function __construct($msg_type=1, $ipc_filename = __FILE__, $serialize_needed = true, $block_send = false, $option_receive = MSG_IPC_NOWAIT, $maxsize = 100000)
     {
         $this->msg_type = $msg_type;
         $this->serialize_needed = $serialize_needed;
@@ -56,7 +56,7 @@ class SystemVMessageQueue implements IMessageQueue
      * 初始化一个队列
      * @param $ipc_filename
      * @param $msg_type
-     * @throws Exception
+     * @throws \Exception
      */
     public function init_queue($ipc_filename, $msg_type)
     {
@@ -68,8 +68,8 @@ class SystemVMessageQueue implements IMessageQueue
     /**
      * @param $ipc_filename
      * @param $msg_type
+     * @throws \Exception
      * @return int
-     * @throws Exception
      */
     public function get_ipc_key($ipc_filename, $msg_type)
     {
@@ -81,8 +81,8 @@ class SystemVMessageQueue implements IMessageQueue
 
     /**
      * 从队列获取一个
+     * @throws \Exception
      * @return bool
-     * @throws Exception
      */
     public function get()
     {
@@ -101,7 +101,8 @@ class SystemVMessageQueue implements IMessageQueue
     /**
      * 写入队列
      * @param $message
-     * @throws Exception
+     * @throws \Exception
+     * @return bool
      */
     public function put($message)
     {
@@ -177,8 +178,8 @@ class SystemVMessageQueue implements IMessageQueue
     //修改队列能容纳的最大字节数，需要root权限
     /**
      * @param $size
+     * @throws \Exception
      * @return bool
-     * @throws Exception
      */
     public function set_max_queue_size($size)
     {
@@ -202,7 +203,7 @@ class SystemVMessageQueue implements IMessageQueue
     /**
      * 检查修改队列状态的权限
      * @param $key
-     * @throws Exception
+     * @throws \Exception
      */
     private function check_set_privilege($key)
     {
